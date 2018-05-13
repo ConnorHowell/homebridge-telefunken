@@ -19,9 +19,9 @@
     "homebridge-plugin"
   ],
   "repository": {
-		"type": "git",
-		"url": "git://github.com/MTrinkiesJr/homebridge-telefunken.git"
-	},
+    "type": "git",
+    "url": "git://github.com/MTrinkiesJr/homebridge-telefunken.git"
+  },
   "license": "ISC",
   "main": "index.js",
   "maintainers": [
@@ -31,5 +31,5 @@
     }
   ],
   "name": "homebridge-telefunken-test",
-  "version": "0.0.2"
+  "version": "0.0.3"
 }
