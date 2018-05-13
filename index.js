@@ -67,7 +67,7 @@ function telefunkenAccessory(log, config) {
 telefunkenAccessory.prototype = {
     AddButton: function (buttonName, buttonCode)
     {
-        service = new  Service.Switch(`${this.name}${buttonName}`, butonName);
+        service = new  Service.Switch(`${this.name}${buttonName}`, buttonName);
         service
         .getCharacteristic(Characteristic.On)
         .on('get', callback => callback(null, false))
