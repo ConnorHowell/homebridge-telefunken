@@ -15,30 +15,33 @@ function telefunkenAccessory(log, config) {
     this.default_state_off = false;
 }
 
+
+
 telefunkenAccessory.prototype = {
-
-    getPowerState: function (callback) {
-        callback(null, !this.default_state_off);
-    },
-
-    setPowerState: function(powerOn, callback) {
-        var res = request.post({
-            url:     'http://'+this.ip+':56789/apps/vr/remote',
-            body:    '<remote><key code="1012" /></remote>'
-        }, function(error, response, body){
-            if (error) {
-                callback(error);
-            } else {
-                callback();
-            }
+    AddButton: function (buttonName, buttonCode)
+    {
+        service = new  Service.Switch(`${this.name}${buttonName}`, butonName);
+        service
+        .getCharacteristic(Characteristic.On)
+        .on('get', callback => callback(null, false))
+        .on('set', (value, callback) => {
+            var res = request.post({
+                url:     'http://'+this.ip+':56789/apps/vr/remote',
+                body:    '<remote><key code="'+buttonCode+'" /></remote>'
+            }, function(error, response, body){
+                if (error) {
+                    callback(error);
+                } else {
+                    callback();
+                }
+            });
         });
-    },
 
-    identify: function (callback) {
-        callback(); // success
+        return service;
     },
 
     getServices: function () {
+        var services = [];
         var informationService = new Service.AccessoryInformation();
 
         informationService
@@ -46,46 +49,14 @@ telefunkenAccessory.prototype = {
         .setCharacteristic(Characteristic.Model, "Telefunken TV")
         .setCharacteristic(Characteristic.SerialNumber, "-");
 
-        switchService = new  Service.Switch(`${this.name}Power`, 'Power');
-        switchService
-        .getCharacteristic(Characteristic.On)
-        .on('get', this.getPowerState.bind(this))
-        .on('set', this.setPowerState.bind(this));
+        
+        services.push(informationService);
+        
+        for(var code in codes)
+        {
+            services.push(this.AddButton(code, codes[code]));
+        }
 
-        volumeUp = new  Service.Switch(`${this.name}volumeUp`, 'Volume Up');
-        volumeUp
-        .getCharacteristic(Characteristic.On)
-        .on('get', callback => callback(null, false))
-        .on('set', (value, callback) => {
-            var res = request.post({
-                url:     'http://'+this.ip+':56789/apps/vr/remote',
-                body:    '<remote><key code="1016" /></remote>'
-            }, function(error, response, body){
-                if (error) {
-                    callback(error);
-                } else {
-                    callback();
-                }
-            });
-        });
-
-        volumeDown = new  Service.Switch(`${this.name}volumeDown`, 'Volume Down');
-        volumeDown
-        .getCharacteristic(Characteristic.On)
-        .on('get', callback => callback(null, false))
-        .on('set', (value, callback) => {
-            var res = request.post({
-                url:     'http://'+this.ip+':56789/apps/vr/remote',
-                body:    '<remote><key code="1017" /></remote>'
-            }, function(error, response, body){
-                if (error) {
-                    callback(error);
-                } else {
-                    callback();
-                }
-            });
-        });
-
-        return [switchService, informationService, volumeUp, volumeDown];
+        return services;
     }
 };
