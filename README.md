@@ -3,8 +3,7 @@
 
 ## Features
 
-* On/Off Functionality (TV's network connection and USB ports stay active but is still in standby)
-* WIP: Volume Up/Down, no way to set a value or read the current volume (Can only increase/decrease)
+* All well know Button on a TV Remote full list below
 
 
 ## Installation
@@ -32,7 +31,7 @@ Add the accessory in `config.json` in your home directory inside `.homebridge`.
     {
       "accessory": "telefunken",
       "name": "TV",
-      "ip": "192.168.1.103",
+      "ip": "192.168.1.103"
     }
   ]  
 }
@@ -41,7 +40,53 @@ Add the accessory in `config.json` in your home directory inside `.homebridge`.
 ## Contributing
 Feel free to contribute to this repo if you figure out any more features that could be added, currently I have mapped the following key codes:
 ```
-1016 = Volume Up
-1017 = Volume Down
-1012 = Standby
-```
+ChannelUp = 1032;                 
+ChannelDown = 1033;                 
+Zero = 1000;                        
+One = 1001;                          
+Two = 1002;                          
+Three = 1003;                        
+Four = 1004;                         
+Five = 1005;                         
+ix = 1006;                          
+Seven = 1007;                        
+Eight = 1008;                        
+Nine = 1009;                         
+Back = 1010;                         
+ChangeRatio = 1011;                
+Power = 1012;                        
+Mute = 1013;                         
+Long = 1015;                         
+VolumeUp = 1016;                     
+VolumeDown = 1017;                   
+Info = 1018;                         
+Down = 1019;                         
+Up = 1020;                           
+Left = 1021;                        
+Right = 1022;                         
+Stop = 1024;                          
+PlayPause = 1025;                     
+Rewind = 1027;                        
+FastForward = 1028;                   
+Subtitle = 1031;                      
+Close = 1037;                         
+Favorites = 1040;                     
+Timer = 1042;                         
+QuickMenu = 1043;                     
+Apps = 1046;                          
+EPG = 1047;                           
+Menu = 1048;                         
+Pause = 1049;                        
+Yellow = 1050;                       
+Record = 1051;                       
+Blue = 1052;                         
+OK = 1053;                           
+Green = 1054;                        
+Red = 1055;                          
+Input = 1056;             
+MediaBrowser = 1057;                 
+Text = 1255;  
+
+## Furure plans
+
+Adding section handling for specified keys
