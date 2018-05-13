@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/MTrinkiesJr/homebridge-telefunken.git"
+    "url": "https://github.com/MTrinkiesJr/homebridge-telefunken.git"
   },
   "license": "ISC",
   "main": "index.js",
