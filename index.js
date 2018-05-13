@@ -2,7 +2,8 @@ var Service, Characteristic;
 var request = require('request');
 
 var codes = [];
-
+codes["ChannelUp"] = 1032;                   //Nächster Sender
+codes["ChannelDown"] = 1033;                 //Vorheriger Sender
 codes["Zero"] = 1000;                        //Taste: 0
 codes["One"] = 1001;                          //Taste: 1
 codes["Two"] = 1002;                          //Taste: 2
