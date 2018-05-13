@@ -1,6 +1,6 @@
 {
   "author": {
-    "name": "Connor Howell"
+    "name": "Michael Trinkies"
   },
   "dependencies": {
     "request": "^2.83.0"
@@ -20,16 +20,16 @@
   ],
   "repository": {
 		"type": "git",
-		"url": "git://github.com/Howelley/homebridge-telefunken.git"
+		"url": "git://github.com/MTrinkiesJr/homebridge-telefunken.git"
 	},
   "license": "ISC",
   "main": "index.js",
   "maintainers": [
     {
-      "name": "howelley",
-      "email": "connor.howell@mail.com"
+      "name": "Trinkies",
+      "email": "mickyt@online.de"
     }
   ],
   "name": "homebridge-telefunken",
-  "version": "1.1.7"
+  "version": "0.0.1"
 }
