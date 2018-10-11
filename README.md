@@ -87,6 +87,6 @@ Input = 1056;
 MediaBrowser = 1057;                 
 Text = 1255;  
 
-## Furure plans
+## Future plans
 
 Adding section handling for specified keys
