@@ -57,10 +57,12 @@ module.exports = function (homebridge) {
 
 
 function telefunkenAccessory(log, config) {
+    log("Initialize Telefunken Accessory");
     this.log = log;
     this.ip = config["ip"];
     this.name = config["name"];
     this.default_state_off = false;
+    this.log("Configured TV Endpoint" + this.ip);
 }
 
 
@@ -73,6 +75,7 @@ telefunkenAccessory.prototype = {
         .getCharacteristic(Characteristic.On)
         .on('get', callback => callback(null, false))
         .on('set', (value, callback) => {
+            this.log("Trigger TV Endpoint with payload: '" + '<remote><key code="'+buttonCode+'" /></remote>' +"'")
             var res = request.post({
                 url:     'http://'+this.ip+':56789/apps/vr/remote',
                 body:    '<remote><key code="'+buttonCode+'" /></remote>'
@@ -104,6 +107,8 @@ telefunkenAccessory.prototype = {
         {
             services.push(this.AddButton(code, codes[code]));
         }
+
+        this.log("Initialized " + codes.length + " buttons");
 
         return services;
     }
