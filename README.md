@@ -24,6 +24,8 @@ sudo npm install -g homebridge-telefunken
 ## Configuration
 
 Add the accessory in `config.json` in your home directory inside `.homebridge`.
+For older telefunken-tv's use `apps/vr/remote` for `api_url`.
+In order to work on some tv's you should activate virtual remote in the settings of your telefunken-tv.
 
 ```js
 {
@@ -31,6 +33,7 @@ Add the accessory in `config.json` in your home directory inside `.homebridge`.
     {
       "accessory": "telefunken",
       "name": "TV",
+      "api_url": "apps/SmartCenter",
       "ip": "192.168.1.103"
     }
   ]  
