@@ -61,6 +61,7 @@ function telefunkenAccessory(log, config) {
     this.log = log;
     this.ip = config["ip"];
     this.name = config["name"];
+    this.api_url = config["api_url"];
     this.default_state_off = false;
     this.log("Configured TV Endpoint" + this.ip);
 }
@@ -77,7 +78,7 @@ telefunkenAccessory.prototype = {
         .on('set', (value, callback) => {
             this.log("Trigger TV Endpoint with payload: '" + '<remote><key code="'+buttonCode+'" /></remote>' +"'")
             var res = request.post({
-                url:     'http://'+this.ip+':56789/apps/vr/remote',
+                url:     'http://'+this.ip+':56789/'+this.api_url,
                 body:    '<remote><key code="'+buttonCode+'" /></remote>'
             }, function(error, response, body){
                 if (error) {
