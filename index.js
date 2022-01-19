@@ -1,6 +1,7 @@
 var Service, Characteristic;
 var request = require('request');
 
+
 var codes = [];
 codes["ChannelUp"] = 1032;                   //Nächster Sender
 codes["ChannelDown"] = 1033;                 //Vorheriger Sender
@@ -69,6 +70,11 @@ function telefunkenAccessory(log, config) {
 
 
 telefunkenAccessory.prototype = {
+
+    //SendRequest: function (buttonCode){
+    //this.log("Trigger TV Endpoint with payload: '" + '<remote><key code="'+buttonCode+'" /></remote>' +"'")
+    //},
+
     AddButton: function (buttonName, buttonCode)
     {
         service = new  Service.Switch(`${this.name}${buttonName}`, buttonName);
@@ -76,17 +82,15 @@ telefunkenAccessory.prototype = {
             .getCharacteristic(Characteristic.On)
             .on('get', callback => callback(null, false))
             .on('set', (value, callback) => {
-                this.log("Trigger TV Endpoint with payload: '" + '<remote><key code="'+buttonCode+'" /></remote>' +"'")
                 var urlRequest ='http://'+this.ip+':56789/'+this.api_url
-                this.log(urlRequest)
+                var body = '<remote><key code='+buttonCode+'/></remote>'
                 var res = request.post({
-                    //                http://192.168.178.75:56789/apps/SmartCenter
                     url:     urlRequest,
-                    body:    '<remote><key code="'+buttonCode+'" /></remote>'
+                    body: body
                 }, function(error, response, body){
+                    console.log(error)
                     if (error) {
                         callback(error);
-                        this.log(error)
                     } else {
                         callback();
                     }
@@ -120,3 +124,4 @@ telefunkenAccessory.prototype = {
 
 
 };
+
