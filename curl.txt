@@ -1,1 +1,0 @@
-curl --data "<remote><key code="1004"/></remote>" "http://192.168.178.75:56789/apps/SmartCenter"
