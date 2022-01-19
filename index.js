@@ -47,7 +47,7 @@ codes["Green"] = 1054;                        //Grün
 codes["Red"] = 1055;                          //Rot
 codes["Input"] = 1056;                        //Bildquelle wählen
 codes["MediaBrowser"] = 1057;                 //Meidabrowser öffnen
-codes["Text"] = 1255;                       //Button "TEXT" 
+codes["Text"] = 1255;                       //Button "TEXT"
 
 module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
@@ -73,21 +73,25 @@ telefunkenAccessory.prototype = {
     {
         service = new  Service.Switch(`${this.name}${buttonName}`, buttonName);
         service
-        .getCharacteristic(Characteristic.On)
-        .on('get', callback => callback(null, false))
-        .on('set', (value, callback) => {
-            this.log("Trigger TV Endpoint with payload: '" + '<remote><key code="'+buttonCode+'" /></remote>' +"'")
-            var res = request.post({
-                url:     'http://'+this.ip+':56789/'+this.api_url,
-                body:    '<remote><key code="'+buttonCode+'" /></remote>'
-            }, function(error, response, body){
-                if (error) {
-                    callback(error);
-                } else {
-                    callback();
-                }
+            .getCharacteristic(Characteristic.On)
+            .on('get', callback => callback(null, false))
+            .on('set', (value, callback) => {
+                this.log("Trigger TV Endpoint with payload: '" + '<remote><key code="'+buttonCode+'" /></remote>' +"'")
+                var urlRequest ='http://'+this.ip+':56789/'+this.api_url
+                this.log(urlRequest)
+                var res = request.post({
+                    //                http://192.168.178.75:56789/apps/SmartCenter
+                    url:     urlRequest,
+                    body:    '<remote><key code="'+buttonCode+'" /></remote>'
+                }, function(error, response, body){
+                    if (error) {
+                        callback(error);
+                        this.log(error)
+                    } else {
+                        callback();
+                    }
+                });
             });
-        });
 
         return service;
     },
@@ -97,13 +101,13 @@ telefunkenAccessory.prototype = {
         var informationService = new Service.AccessoryInformation();
 
         informationService
-        .setCharacteristic(Characteristic.Manufacturer, "TELEFUNKEN")
-        .setCharacteristic(Characteristic.Model, "Telefunken TV")
-        .setCharacteristic(Characteristic.SerialNumber, "-");
+            .setCharacteristic(Characteristic.Manufacturer, "TELEFUNKEN")
+            .setCharacteristic(Characteristic.Model, "Telefunken TV")
+            .setCharacteristic(Characteristic.SerialNumber, "-");
 
-        
+
         services.push(informationService);
-        
+
         for(var code in codes)
         {
             services.push(this.AddButton(code, codes[code]));
@@ -114,5 +118,5 @@ telefunkenAccessory.prototype = {
         return services;
     }
 
-    
+
 };
