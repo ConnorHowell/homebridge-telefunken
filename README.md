@@ -1,7 +1,7 @@
 # TELEFUNKEN Homebridge Plugin
 `homebridge-telefunken` is a basic homebridge plugin for Telefunken TV's, the API for the TV's themselves is very bare and is quite limiting in terms of readable information so this is very basic in terms of functionality.
 
-This plugin is a fork of [this](https://www.npmjs.com/package/homebridge) plugin.
+This plugin is a fork of [this](https://github.com/MTrinkiesJr/homebridge-telefunken) plugin.
 
 This version of the plugin allows to add the older as well as the newer telefunken tv's(which can be configurated in the json config with `api_url`).
 
@@ -28,8 +28,13 @@ sudo npm install -g homebridge-telefunken-new_tvs
 ## Configuration
 
 Add the accessory in `config.json` in your home directory inside `.homebridge`.
-For older telefunken-tv's use `apps/vr/remote` for `api_url`.
+ `api_url` sets the path to the virtual-remote api on your tv. For older telefunken-tv's use `apps/vr/remote` for `api_url`. For newer telefunken-tv's use `apps/SmartCenter` for `api_url`.
+
+
 In order to work on some tv's you should activate virtual remote in the settings of your telefunken-tv.
+
+For `ip`: find the ip adress of your tv and put it as value.
+
 
 ```js
 {
