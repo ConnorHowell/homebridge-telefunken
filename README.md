@@ -1,6 +1,10 @@
 # TELEFUNKEN Homebridge Plugin
 `homebridge-telefunken` is a basic homebridge plugin for Telefunken TV's, the API for the TV's themselves is very bare and is quite limiting in terms of readable information so this is very basic in terms of functionality.
 
+This plugin is a fork of [this](https://www.npmjs.com/package/homebridge) plugin.
+
+This version of the plugin allows to add the older as well as the newer telefunken tv's(which can be configurated in the json config with `api_url`).
+
 ## Features
 
 * All well know Button on a TV Remote full list below
@@ -18,7 +22,7 @@ sudo npm install -g homebridge
 
 Install homebridge-telefunken:
 ```sh
-sudo npm install -g homebridge-telefunken
+sudo npm install -g homebridge-telefunken-new_tvs
 ```
 
 ## Configuration
@@ -90,6 +94,4 @@ Input = 1056;
 MediaBrowser = 1057;                 
 Text = 1255;  
 
-## Future plans
 
-Adding section handling for specified keys
